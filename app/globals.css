@@ -1,26 +1,62 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: #f07621;
+  --secondary: #020001;
+  --gray: #272827;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-gray: var(--gray);
+
+  --font-sans: var(--font-inter), sans-serif;
+  --font-blackops: var(--font-black-ops), sans-serif;
+  --font-mono: var(--font-ibm-mono), monospace;
+  --font-ibmsans: var(--font-ibm-sans), sans-serif;
+  --font-interblack: var(--font-inter-black), sans-serif;
+  --font-ibm-sans-bold: var(--font-ibm-sans-bold);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes move-stripes {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 0;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes fill-progress {
+  to {
+    width: 100%;
+  }
+}
+
+.loading-stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--secondary),
+    var(--secondary) 14px,
+    var(--primary) 14px,
+    var(--primary) 28px
+  );
+  background-size: 40px 100%;
+  animation: move-stripes 1s linear infinite;
+}
+
+.loading-progress {
+  width: 0%;
+  animation: fill-progress 1.53s linear forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-stripes {
+    animation: none;
+  }
+
+  .loading-progress {
+    animation-duration: 1ms;
+  }
 }
